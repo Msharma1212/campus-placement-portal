@@ -29,3 +29,35 @@ import {
   Timestamp,
   increment
 } from 'firebase/firestore';
+
+interface AppContextType {
+  currentUser: User | null;
+  authLoading: boolean;
+  setCurrentUser: (user: User | null) => void;
+  jobs: JobPosting[];
+  applications: Application[];
+  interviews: Interview[];
+  notifications: Notification[];
+  users: User[];
+  companies: Company[];
+  queries: StudentQuery[];
+  applyToJob: (job: JobPosting) => Promise<void>;
+  postJob: (job: Omit<JobPosting, 'id'>) => Promise<void>;
+  updateApplicationStatus: (appId: string, status: Application['status']) => Promise<void>;
+  scheduleInterview: (interview: Omit<Interview, 'id'>) => Promise<void>;
+  addNotification: (userId: string, title: string, message: string, type: Notification['type']) => Promise<void>;
+  blockStudent: (studentId: string, blocked: boolean) => Promise<void>;
+  verifyStudent: (studentId: string, verified: boolean) => Promise<void>;
+  addCompany: (company: Omit<Company, 'id'>) => Promise<void>;
+  updateProfile: (profile: Partial<User>) => Promise<void>;
+  nextRound: (applicationId: string) => Promise<void>;
+  addQuery: (message: string) => Promise<void>;
+  resolveQuery: (queryId: string, response: string) => Promise<void>;
+  refreshData: () => Promise<void>;
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  loginWithGoogle: () => Promise<{ success: boolean; error?: string }>;
+  signup: (userData: Omit<User, 'id'> & { password?: string }) => Promise<{ success: boolean; error?: string }>;
+  logout: () => void;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
