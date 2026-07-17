@@ -109,4 +109,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setCurrentUser(null);
       }
       setAuthLoading(false);
-    });  
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Real-time listeners for data
+  useEffect(() => {
+    if (!currentUser) {
+      setData({
+        jobs: [],
+        applications: [],
+        interviews: [],
+        notifications: [],
+        users: [],
+        companies: [],
+        queries: [],
+      });
+      return;
+    }    
