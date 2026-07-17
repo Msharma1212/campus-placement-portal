@@ -61,3 +61,27 @@ interface AppContextType {
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
+
+export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [data, setData] = useState<{
+    jobs: JobPosting[];
+    applications: Application[];
+    interviews: Interview[];
+    notifications: Notification[];
+    users: User[];
+    companies: Company[];
+    queries: StudentQuery[];
+  }>({
+    jobs: [],
+    applications: [],
+    interviews: [],
+    notifications: [],
+    users: [],
+    companies: [],
+    queries: [],
+  });
