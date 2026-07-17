@@ -127,4 +127,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         queries: [],
       });
       return;
-    }    
+    } 
+    
+    const unsubscribers: (() => void)[] = [];
+
+    // Jobs
+    unsubscribers.push(onSnapshot(collection(db, 'jobs'), (snapshot) => {
+      const jobs = snapshot.docs.map(d => d.data() as JobPosting);
+      setData(prev => ({ ...prev, jobs }));
