@@ -85,3 +85,28 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     companies: [],
     queries: [],
   });
+
+  // Listener for Auth state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      setAuthLoading(true);
+      if (firebaseUser) {
+        try {
+          const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
+          if (userDoc.exists()) {
+            const userData = userDoc.data() as User;
+            console.log("User logged in:", userData.role, firebaseUser.uid);
+            setCurrentUser(userData);
+          } else {
+            console.warn("User authenticated but profile not found in Firestore:", firebaseUser.uid);
+            setCurrentUser(null);
+          }
+        } catch (error) {
+          console.error("Error fetching user profile:", error);
+          setCurrentUser(null);
+        }
+      } else {
+        setCurrentUser(null);
+      }
+      setAuthLoading(false);
+    });  
