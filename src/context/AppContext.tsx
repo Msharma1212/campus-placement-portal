@@ -169,3 +169,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       }, (error) => console.error("Apps listener failed", error)));
       unsubscribers.push(onSnapshot(query(collection(db, 'interviews'), where('studentId', '==', currentUser.id)), (snapshot) => {
         setData(prev => ({ ...prev, interviews: snapshot.docs.map(d => d.data() as Interview) }));
+      }, (error) => console.error("Interviews listener failed", error)));
+      unsubscribers.push(onSnapshot(query(collection(db, 'notifications'), where('userId', '==', currentUser.id)), (snapshot) => {
+        setData(prev => ({ ...prev, notifications: snapshot.docs.map(d => d.data() as Notification) }));
