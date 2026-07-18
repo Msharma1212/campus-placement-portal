@@ -144,3 +144,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         initialJobs.forEach(j => setDoc(doc(db, 'jobs', j.id), j));
       }
     }, (error) => handleFirestoreError(error, OperationType.LIST, 'jobs')));
+
+    // Companies
+    unsubscribers.push(onSnapshot(collection(db, 'companies'), (snapshot) => {
+      const companies = snapshot.docs.map(d => d.data() as Company);
+      setData(prev => ({ ...prev, companies }));
