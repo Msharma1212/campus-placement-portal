@@ -135,3 +135,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     unsubscribers.push(onSnapshot(collection(db, 'jobs'), (snapshot) => {
       const jobs = snapshot.docs.map(d => d.data() as JobPosting);
       setData(prev => ({ ...prev, jobs }));
+
+      if (snapshot.empty && currentUser.role === 'TPO') {
+        const initialJobs = [
+          { id: 'j1', companyId: 'c1', companyName: 'Google', title: 'Software Engineer Graduate', description: 'Work on cutting-edge systems.', requirements: 'Strong DS & Algo', minCgpa: 8.0, branches: ['CSE', 'IT'], salary: '35 LPA', deadline: '2026-06-01', status: 'OPEN' },
+          { id: 'j2', companyId: 'c2', companyName: 'Microsoft', title: 'Product Manager Intern', description: 'Build products for millions.', requirements: 'Strategic thinking', minCgpa: 7.5, branches: ['CSE', 'ECE', 'MBA'], salary: '25 LPA', deadline: '2026-05-30', status: 'OPEN' },
+        ];
+        initialJobs.forEach(j => setDoc(doc(db, 'jobs', j.id), j));
+      }
+    }, (error) => handleFirestoreError(error, OperationType.LIST, 'jobs')));
