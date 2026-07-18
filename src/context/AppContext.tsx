@@ -149,3 +149,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     unsubscribers.push(onSnapshot(collection(db, 'companies'), (snapshot) => {
       const companies = snapshot.docs.map(d => d.data() as Company);
       setData(prev => ({ ...prev, companies }));
+
+     // Auto-seed if empty (Demo purposes)
+      if (snapshot.empty && currentUser.role === 'TPO') {
+        const initialCompanies = [
