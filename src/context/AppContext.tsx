@@ -153,3 +153,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
      // Auto-seed if empty (Demo purposes)
       if (snapshot.empty && currentUser.role === 'TPO') {
         const initialCompanies = [
+          { id: 'c1', name: 'Google', description: 'Search and Cloud services' },
+          { id: 'c2', name: 'Microsoft', description: 'Software and Cloud' },
+          { id: 'c3', name: 'Adobe', description: 'Creative software' },
+        ];
+        initialCompanies.forEach(c => setDoc(doc(db, 'companies', c.id), c));
+      }
+    }, (error) => handleFirestoreError(error, OperationType.LIST, 'companies')));
