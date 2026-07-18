@@ -160,3 +160,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         initialCompanies.forEach(c => setDoc(doc(db, 'companies', c.id), c));
       }
     }, (error) => handleFirestoreError(error, OperationType.LIST, 'companies')));
+
+    // Role-based filtering for applications, interviews, etc.
+    const role = currentUser.role?.toUpperCase();
+    if (role === 'STUDENT') {
+      unsubscribers.push(onSnapshot(query(collection(db, 'applications'), where('studentId', '==', currentUser.id)), (snapshot) => {
+        setData(prev => ({ ...prev, applications: snapshot.docs.map(d => d.data() as Application) }));
