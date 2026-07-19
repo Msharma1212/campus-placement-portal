@@ -180,3 +180,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       // Admins/Coords/HR see more
       unsubscribers.push(onSnapshot(collection(db, 'applications'), (snapshot) => {
         setData(prev => ({ ...prev, applications: snapshot.docs.map(d => d.data() as Application) }));
+      }, (error) => console.error("Admin Apps listener failed", error)));
+      unsubscribers.push(onSnapshot(collection(db, 'interviews'), (snapshot) => {
+        setData(prev => ({ ...prev, interviews: snapshot.docs.map(d => d.data() as Interview) }));
+      }, (error) => console.error("Admin Interviews listener failed", error)));
+
