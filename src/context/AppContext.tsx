@@ -198,3 +198,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return () => unsubscribers.forEach(u => u());
   }, [currentUser]);
 
+  const refreshData = async () => {
+    // With onSnapshot, manual refresh is often unnecessary
+  };
