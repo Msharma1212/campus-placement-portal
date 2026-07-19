@@ -185,3 +185,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setData(prev => ({ ...prev, interviews: snapshot.docs.map(d => d.data() as Interview) }));
       }, (error) => console.error("Admin Interviews listener failed", error)));
 
+      if (role === 'TPO' || role === 'COORDINATOR') {
+        unsubscribers.push(onSnapshot(collection(db, 'users'), (snapshot) => {
+          setData(prev => ({ ...prev, users: snapshot.docs.map(d => d.data() as User) }));
+        }, (error) => console.error("Admin Users listener failed", error)));
+        unsubscribers.push(onSnapshot(collection(db, 'queries'), (snapshot) => {
+          setData(prev => ({ ...prev, queries: snapshot.docs.map(d => d.data() as StudentQuery) }));
+        }, (error) => console.error("Admin Queries listener failed", error)));
+      }
+    }
+
+    return () => unsubscribers.forEach(u => u());
+  }, [currentUser]);
+
