@@ -208,3 +208,5 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       console.log(`[Auth] Attempting login for: ${trimmedEmail}`);
       const userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, password);
 
+      console.log(`[Auth] Login successful for UID: ${userCredential.user.uid}`);
+      const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
