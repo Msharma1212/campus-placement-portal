@@ -175,3 +175,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       }, (error) => console.error("Notifications listener failed", error)));
       unsubscribers.push(onSnapshot(query(collection(db, 'queries'), where('studentId', '==', currentUser.id)), (snapshot) => {
         setData(prev => ({ ...prev, queries: snapshot.docs.map(d => d.data() as StudentQuery) }));
+      }, (error) => console.error("Queries listener failed", error)));
+    } else if (['TPO', 'COORDINATOR', 'HR'].includes(role || '')) {
+      // Admins/Coords/HR see more
+      unsubscribers.push(onSnapshot(collection(db, 'applications'), (snapshot) => {
+        setData(prev => ({ ...prev, applications: snapshot.docs.map(d => d.data() as Application) }));
