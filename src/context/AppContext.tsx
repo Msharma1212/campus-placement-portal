@@ -217,3 +217,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setCurrentUser(userData);
         return { success: true };
       }
+      console.warn(`[Firestore] Profile missing for UID: ${userCredential.user.uid}`);
+      return { success: false, error: 'Auth successful but profile not found. Please try signing up to recreate your profile.' };
+    } catch (error: any) {
+      console.error('[Auth] Login error:', error);
+      const errorCode = error.code;
+      let message = 'Login failed. Please check your email and password.';
