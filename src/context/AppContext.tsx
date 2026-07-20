@@ -223,3 +223,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       console.error('[Auth] Login error:', error);
       const errorCode = error.code;
       let message = 'Login failed. Please check your email and password.';
+
+      if (errorCode === 'auth/invalid-credential' || errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
+        message = 'Invalid credentials. If you havent created an account yet, please Sign Up first. Note: Demo accounts must be created manually via Sign Up.';
