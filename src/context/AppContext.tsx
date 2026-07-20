@@ -251,3 +251,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setCurrentUser(userData);
         return { success: true };
       } else {
+
+        // New Google user, need to create a default STUDENT profile
+        const newUser: User = {
+          id: userCredential.user.uid,
+          name: userCredential.user.displayName || 'Google User',
+          email: userCredential.user.email || '',
+          role: 'STUDENT',
+          isVerified: false,
+          isBlocked: false,
+          department: 'Computer Science',
+          branch: 'Computer Science',
+        };
