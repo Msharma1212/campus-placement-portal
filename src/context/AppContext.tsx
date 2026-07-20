@@ -246,3 +246,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const provider = new GoogleAuthProvider();
       const userCredential = await signInWithPopup(auth, provider);
       const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data() as User;
+        setCurrentUser(userData);
+        return { success: true };
+      } else {
