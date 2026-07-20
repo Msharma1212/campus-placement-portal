@@ -226,3 +226,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
       if (errorCode === 'auth/invalid-credential' || errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
         message = 'Invalid credentials. If you havent created an account yet, please Sign Up first. Note: Demo accounts must be created manually via Sign Up.';
+
+      } else if (errorCode === 'auth/user-disabled') {
+        message = 'This account has been disabled.';
+      } else if (errorCode === 'auth/too-many-requests') {
+        message = 'Too many failed attempts. Please try again later.';
+      } else if (errorCode === 'auth/network-request-failed') {
+        message = 'Network error. Please check your internet connection.';
+      } else if (errorCode === 'auth/operation-not-allowed') {
+        message = 'Email/Password login is not enabled in Firebase. Please enable it in the console.';
+      }
+      
+      return { success: false, error: message };
+    }
+  };
