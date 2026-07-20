@@ -210,3 +210,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
       console.log(`[Auth] Login successful for UID: ${userCredential.user.uid}`);
       const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data() as User;
+        console.log(`[Firestore] Profile found. Role: ${userData.role}`);
+        setCurrentUser(userData);
+        return { success: true };
+      }
