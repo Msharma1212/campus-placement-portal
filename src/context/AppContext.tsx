@@ -271,3 +271,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       console.error('Google login failed', error);
       let message = 'Google login failed. Please try again.';
       const errorCode = error.code;
+
+      if (errorCode === 'auth/popup-closed-by-user') {
+        message = 'The login popup was closed before completion.';
+      } else if (errorCode === 'auth/popup-blocked') {
+        message = 'The login popup was blocked by your browser.';
+      }
+      return { success: false, error: message };
+    }
+  };
