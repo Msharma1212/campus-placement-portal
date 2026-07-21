@@ -319,3 +319,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return { success: false, error: message };
     }
   };
+
+  const logout = async () => {
+    await signOut(auth);
+    setCurrentUser(null);
+  };
