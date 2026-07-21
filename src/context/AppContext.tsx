@@ -290,3 +290,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const userCredential = await createUserWithEmailAndPassword(auth, trimmedEmail, userData.password);
       const { password: _, ...userProfile } = userData;
       const roleUpper = userData.role.toUpperCase() as UserRole;
+
+      const finalUser: User = { 
+        ...userProfile, 
+        email: trimmedEmail,
+        role: roleUpper,
+        id: userCredential.user.uid,
+        department: userData.department || 'General',
+        branch: roleUpper === 'STUDENT' ? (userData.department || userData.branch || 'General') : undefined,
+        isVerified: roleUpper === 'STUDENT' ? false : true,
+        isBlocked: false,
+        cgpa: roleUpper === 'STUDENT' ? (userData.cgpa || 0) : undefined,
+      };
