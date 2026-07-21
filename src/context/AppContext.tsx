@@ -280,3 +280,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return { success: false, error: message };
     }
   };
+
+  const signup = async (userData: Omit<User, 'id'> & { password?: string }) => {
+    const trimmedEmail = userData.email.trim();
+    try {
+      console.log(`Attempting signup for role: ${userData.role}, email: ${trimmedEmail}`);
+      if (!userData.password) throw new Error("Password required");
