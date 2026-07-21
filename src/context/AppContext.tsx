@@ -286,3 +286,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     try {
       console.log(`Attempting signup for role: ${userData.role}, email: ${trimmedEmail}`);
       if (!userData.password) throw new Error("Password required");
+
+      const userCredential = await createUserWithEmailAndPassword(auth, trimmedEmail, userData.password);
+      const { password: _, ...userProfile } = userData;
+      const roleUpper = userData.role.toUpperCase() as UserRole;
