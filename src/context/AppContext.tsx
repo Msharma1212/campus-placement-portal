@@ -263,3 +263,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           department: 'Computer Science',
           branch: 'Computer Science',
         };
+        await setDoc(doc(db, 'users', userCredential.user.uid), newUser);
+        setCurrentUser(newUser);
+        return { success: true };
+      }
+    } catch (error: any) {
+      console.error('Google login failed', error);
+      let message = 'Google login failed. Please try again.';
+      const errorCode = error.code;
