@@ -302,3 +302,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         isBlocked: false,
         cgpa: roleUpper === 'STUDENT' ? (userData.cgpa || 0) : undefined,
       };
+
+      console.log("Creating Firestore profile...");
+      await setDoc(doc(db, 'users', userCredential.user.uid), finalUser);
+      console.log("Signup complete.");
+      setCurrentUser(finalUser);
+      return { success: true };
+    } catch (error: any) {
+      console.error('Signup failed', error);
+      let message = 'Signup failed. Please try again.';
+      if (error.code === 'auth/email-already-in-use') {
+        message = 'This email is already in use. Try signing in.';
+      } else if (error.code === 'auth/weak-password') {
+        message = 'Password should be at least 6 characters.';
+      }
+      return { success: false, error: message };
+    }
+  };
