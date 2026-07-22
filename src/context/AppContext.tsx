@@ -370,3 +370,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.CREATE, `interviews/${intId}`);
     }
   };
+
+  const addNotification = async (userId: string, title: string, message: string, type: Notification['type']) => {
+    const notId = `not_${Date.now()}`;
+    const notification: Notification = { 
+      id: notId, 
+      userId, 
+      title, 
+      message, 
+      createdAt: new Date().toISOString(), 
+      isRead: false, 
+      type 
+    };
