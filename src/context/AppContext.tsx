@@ -382,3 +382,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       isRead: false, 
       type 
     };
+    try {
+      await setDoc(doc(db, 'notifications', notId), notification);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.CREATE, `notifications/${notId}`);
+    }
+  };
