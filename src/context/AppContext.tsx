@@ -361,3 +361,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.UPDATE, `applications/${appId}`);
     }
   };
+
+  const scheduleInterview = async (interviewData: Omit<Interview, 'id'>) => {
+    const intId = `int_${Date.now()}`;
+    try {
+      await setDoc(doc(db, 'interviews', intId), { ...interviewData, id: intId });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.CREATE, `interviews/${intId}`);
+    }
+  };
