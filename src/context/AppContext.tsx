@@ -324,3 +324,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     await signOut(auth);
     setCurrentUser(null);
   };
+
+  const applyToJob = async (job: JobPosting) => {
+    if (!currentUser) return;
+    const appId = `app_${Date.now()}`;
+    const application: Application = {
+      id: appId,
+      jobId: job.id,
+      studentId: currentUser.id,
+      studentName: currentUser.name,
+      jobTitle: job.title,
+      companyName: job.companyName,
+      status: 'APPLIED',
+      appliedAt: new Date().toISOString(),
+    };
