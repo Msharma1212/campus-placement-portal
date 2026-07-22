@@ -344,3 +344,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.CREATE, `applications/${appId}`);
     }
   };
+
+  const postJob = async (jobData: Omit<JobPosting, 'id'>) => {
+    const jobId = `job_${Date.now()}`;
+    try {
+      await setDoc(doc(db, 'jobs', jobId), { ...jobData, id: jobId });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.CREATE, `jobs/${jobId}`);
+    }
+  };
