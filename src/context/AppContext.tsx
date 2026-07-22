@@ -353,3 +353,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.CREATE, `jobs/${jobId}`);
     }
   };
+
+  const updateApplicationStatus = async (appId: string, status: Application['status']) => {
+    try {
+      await updateDoc(doc(db, 'applications', appId), { status });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, `applications/${appId}`);
+    }
+  };
