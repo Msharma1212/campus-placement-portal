@@ -338,3 +338,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       status: 'APPLIED',
       appliedAt: new Date().toISOString(),
     };
+    try {
+      await setDoc(doc(db, 'applications', appId), application);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.CREATE, `applications/${appId}`);
+    }
+  };
