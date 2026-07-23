@@ -431,3 +431,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         currentRound: (app?.currentRound || 1) + 1, 
         status: 'INTERVIEW' 
       });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, `applications/${applicationId}`);
+    }
+  };
