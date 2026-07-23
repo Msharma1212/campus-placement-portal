@@ -423,3 +423,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.UPDATE, `users/${currentUser.id}`);
     }
   };
+
+  const nextRound = async (applicationId: string) => {
+    const app = data.applications.find(a => a.id === applicationId);
+    try {
+      await updateDoc(doc(db, 'applications', applicationId), { 
+        currentRound: (app?.currentRound || 1) + 1, 
+        status: 'INTERVIEW' 
+      });
