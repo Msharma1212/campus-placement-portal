@@ -404,3 +404,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.UPDATE, `users/${studentId}`);
     }
   };
+
+  const addCompany = async (companyData: Omit<Company, 'id'>) => {
+    const compId = `comp_${Date.now()}`;
+    try {
+      await setDoc(doc(db, 'companies', compId), { ...companyData, id: compId });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.CREATE, `companies/${compId}`);
+    }
+  };
