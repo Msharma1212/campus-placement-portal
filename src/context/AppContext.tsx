@@ -396,3 +396,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.UPDATE, `users/${studentId}`);
     }
   };
+
+  const verifyStudent = async (studentId: string, verified: boolean) => {
+    try {
+      await updateDoc(doc(db, 'users', studentId), { isVerified: verified });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, `users/${studentId}`);
+    }
+  };
