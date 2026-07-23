@@ -435,3 +435,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.UPDATE, `applications/${applicationId}`);
     }
   };
+
+  const addQuery = async (message: string) => {
+    if (!currentUser) return;
+    const queryId = `query_${Date.now()}`;
+    const queryData: StudentQuery = {
+      id: queryId,
+      studentId: currentUser.id,
+      studentName: currentUser.name,
+      message,
+      department: currentUser.department || 'N/A',
+      status: 'PENDING',
+      createdAt: new Date().toISOString()
+    };
