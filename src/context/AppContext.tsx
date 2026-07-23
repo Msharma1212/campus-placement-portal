@@ -413,3 +413,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.CREATE, `companies/${compId}`);
     }
   };
+
+  const updateProfile = async (profileData: Partial<User>) => {
+    if (!currentUser) return;
+    try {
+      await updateDoc(doc(db, 'users', currentUser.id), profileData);
+      setCurrentUser(prev => prev ? { ...prev, ...profileData } : null);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, `users/${currentUser.id}`);
+    }
+  };
