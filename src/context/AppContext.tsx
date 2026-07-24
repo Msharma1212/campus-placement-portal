@@ -454,3 +454,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.CREATE, `queries/${queryId}`);
     }
   };
+
+  const resolveQuery = async (queryId: string, response: string) => {
+    try {
+      await updateDoc(doc(db, 'queries', queryId), { status: 'RESOLVED', response });
+    } catch (error) {
+      handleFirestoreError(error, OperationType.UPDATE, `queries/${queryId}`);
+    }
+  };
