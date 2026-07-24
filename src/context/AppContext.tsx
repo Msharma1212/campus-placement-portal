@@ -448,3 +448,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       status: 'PENDING',
       createdAt: new Date().toISOString()
     };
+    try {
+      await setDoc(doc(db, 'queries', queryId), queryData);
+    } catch (error) {
+      handleFirestoreError(error, OperationType.CREATE, `queries/${queryId}`);
+    }
+  };
