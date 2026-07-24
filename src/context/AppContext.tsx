@@ -462,3 +462,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       handleFirestoreError(error, OperationType.UPDATE, `queries/${queryId}`);
     }
   };
+
+  return (
+    <AppContext.Provider value={{
+      currentUser, authLoading, setCurrentUser,
+      ...data,
+      applyToJob, postJob, updateApplicationStatus, scheduleInterview, addNotification, blockStudent, verifyStudent, addCompany, updateProfile, nextRound,
+      addQuery, resolveQuery,
+      refreshData, login, loginWithGoogle, signup, logout: () => logout(),
+      activeTab, setActiveTab
+    }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
