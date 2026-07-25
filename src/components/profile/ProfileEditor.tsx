@@ -34,3 +34,7 @@ const addSkill = () => {
       setNewSkill('');
     }
   };
+
+const removeSkill = (skill: string) => {
+    setFormData({ ...formData, skills: formData.skills?.filter(s => s !== skill) });
+  };
