@@ -38,3 +38,10 @@ const addSkill = () => {
 const removeSkill = (skill: string) => {
     setFormData({ ...formData, skills: formData.skills?.filter(s => s !== skill) });
   };
+
+  const addProject = () => {
+    if (newProject.title) {
+      setFormData({ ...formData, projects: [...(formData.projects || []), newProject] });
+      setNewProject({ title: '', link: '' });
+    }
+  };
