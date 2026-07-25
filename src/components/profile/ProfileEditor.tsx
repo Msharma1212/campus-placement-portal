@@ -27,3 +27,10 @@ const handleSave = async () => {
     alert('Profile updated successfully!');
     setActiveTab('dashboard');
   };
+
+const addSkill = () => {
+    if (newSkill && !formData.skills?.includes(newSkill)) {
+      setFormData({ ...formData, skills: [...(formData.skills || []), newSkill] });
+      setNewSkill('');
+    }
+  };
