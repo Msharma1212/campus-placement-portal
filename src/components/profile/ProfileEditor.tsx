@@ -21,3 +21,9 @@ export const ProfileEditor: React.FC = () => {
 
 const [newSkill, setNewSkill] = useState('');
   const [newProject, setNewProject] = useState({ title: '', link: '' });
+
+const handleSave = async () => {
+    await updateProfile(formData);
+    alert('Profile updated successfully!');
+    setActiveTab('dashboard');
+  };
