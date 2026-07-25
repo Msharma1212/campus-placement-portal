@@ -18,3 +18,6 @@ export const ProfileEditor: React.FC = () => {
     skills: currentUser?.skills || [],
     projects: currentUser?.projects || []
   });
+
+const [newSkill, setNewSkill] = useState('');
+  const [newProject, setNewProject] = useState({ title: '', link: '' });
