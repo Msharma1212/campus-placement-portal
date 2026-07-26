@@ -60,3 +60,8 @@ const removeSkill = (skill: string) => {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-slate-500 mb-1">Branch</label>
+
+              <input 
+                type="text" 
+                value={formData.branch}
+                onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
