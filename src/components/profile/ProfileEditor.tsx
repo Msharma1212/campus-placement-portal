@@ -48,3 +48,7 @@ const removeSkill = (skill: string) => {
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-12">
       <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-8"></div>
+          <h1 className="text-2xl font-bold text-slate-900">{currentUser?.name}</h1>
+          <p className="text-slate-500">{currentUser?.branch} • Student ID: {currentUser?.id}</p>
+        </div>
+      </div>
