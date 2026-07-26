@@ -65,3 +65,8 @@ const removeSkill = (skill: string) => {
                 type="text" 
                 value={formData.branch}
                 onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
+                className="w-full px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-500 mb-1">CGPA</label>
