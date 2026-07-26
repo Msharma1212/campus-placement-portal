@@ -56,3 +56,7 @@ const removeSkill = (skill: string) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Academic Details */}
         <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm space-y-6"></div>
+          <h3 className="font-bold text-lg text-slate-900">Academic Details</h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-500 mb-1">Branch</label>
