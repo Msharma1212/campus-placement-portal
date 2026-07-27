@@ -94,3 +94,7 @@ const removeSkill = (skill: string) => {
               onChange={(e) => setNewSkill(e.target.value)}
               className="flex-1 px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl outline-none"
             />
+            <button onClick={addSkill} className="p-2 bg-indigo-600 text-white rounded-xl">
+              <Plus size={20} />
+            </button>
+          </div>
