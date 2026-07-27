@@ -78,3 +78,8 @@ const removeSkill = (skill: string) => {
                   const val = e.target.value;
                   setFormData({ ...formData, cgpa: val === '' ? 0 : parseFloat(val) || 0 });
                 }}
+                className="w-full px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
+              />
+            </div>
+          </div>
+        </div>
