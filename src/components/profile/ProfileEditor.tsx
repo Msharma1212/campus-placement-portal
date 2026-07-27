@@ -83,3 +83,14 @@ const removeSkill = (skill: string) => {
             </div>
           </div>
         </div>
+        {/* Skills */}
+        <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+          <h3 className="font-bold text-lg text-slate-900">Skills</h3>
+          <div className="flex gap-2">
+            <input 
+              type="text" 
+              placeholder="Add skill (e.g. React)"
+              value={newSkill}
+              onChange={(e) => setNewSkill(e.target.value)}
+              className="flex-1 px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl outline-none"
+            />
