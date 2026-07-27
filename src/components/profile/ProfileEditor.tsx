@@ -70,3 +70,11 @@ const removeSkill = (skill: string) => {
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-500 mb-1">CGPA</label>
+              <input 
+                type="number" 
+                step="0.01"
+                value={formData.cgpa}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setFormData({ ...formData, cgpa: val === '' ? 0 : parseFloat(val) || 0 });
+                }}
