@@ -98,3 +98,13 @@ const removeSkill = (skill: string) => {
               <Plus size={20} />
             </button>
           </div>
+
+          <div className="flex flex-wrap gap-2">
+            {formData.skills?.map(skill => (
+              <span key={skill} className="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-sm font-bold flex items-center gap-2">
+                {skill}
+                <button onClick={() => removeSkill(skill)}><X size={14} /></button>
+              </span>
+            ))}
+          </div>
+        </div>
