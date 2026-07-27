@@ -108,3 +108,13 @@ const removeSkill = (skill: string) => {
             ))}
           </div>
         </div>
+        {/* Projects */}
+        <div className="md:col-span-2 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+          <h3 className="font-bold text-lg text-slate-900">Projects</h3>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+            <input 
+              type="text" 
+              placeholder="Project Title"
+              className="md:col-span-5 px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl outline-none"
+              value={newProject.title}
+              onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
