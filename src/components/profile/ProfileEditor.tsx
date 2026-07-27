@@ -118,3 +118,11 @@ const removeSkill = (skill: string) => {
               className="md:col-span-5 px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl outline-none"
               value={newProject.title}
               onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
+            />
+            <input 
+              type="text" 
+              placeholder="Link (Optional)"
+              className="md:col-span-5 px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl outline-none"
+              value={newProject.link}
+              onChange={(e) => setNewProject({ ...newProject, link: e.target.value })}
+            />
