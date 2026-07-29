@@ -114,6 +114,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return () => unsubscribe();
   }, []);
 
+  
   // Real-time listeners for data
   useEffect(() => {
     if (!currentUser) {
